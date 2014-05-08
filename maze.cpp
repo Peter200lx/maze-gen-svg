@@ -14,11 +14,18 @@ Maze::Maze(int x, int y, int enterX, int exitX)
 
 	_x = x;
 	_y = y;
-	_enterX = enterX;
-	if((exitX > 0)&&(exitX < _x))
-		_exitX = exitX;
+	if((enterX >=0)&&(enterX < _x))
+		_enterX = enterX;
+	else if ((enterX >= (0 - _x))&&(enterX < 0))
+		_enterX = _x + enterX;
 	else
-		_exitX = x-1;
+		_enterX = 0;
+	if((exitX >= 0)&&(exitX < _x))
+		_exitX = exitX;
+	else if ((exitX >= (0 - _x))&&(exitX < 0))
+		_exitX = _x + exitX;
+	else
+		_exitX = _x-1;
 }
 
 void Maze::generate()
